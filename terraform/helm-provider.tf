@@ -7,9 +7,9 @@ data "aws_eks_cluster_auth" "eks" {
   name = aws_eks_cluster.eks.name
 }
 
-# Helm provider 설정
+# Helm provider 설정 (v2.x 문법)
 provider "helm" {
-  kubernetes = {
+  kubernetes {
     host                   = data.aws_eks_cluster.eks.endpoint
     cluster_ca_certificate = base64decode(data.aws_eks_cluster.eks.certificate_authority[0].data)
     token                  = data.aws_eks_cluster_auth.eks.token
