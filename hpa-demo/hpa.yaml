@@ -1,0 +1,28 @@
+---
+apiVersion: autoscaling/v2
+kind: HorizontalPodAutoscaler
+metadata:
+  name: myapp
+  namespace: hpa-demo
+spec:
+  scaleTargetRef:
+    apiVersion: apps/v1
+    kind: Deployment
+    name: myapp # 배포 대상을 지정하기 위해 레이블이 아닌 name 속성 사용
+  # pod의 최소 및 최대 복제본 수 설정
+  minReplicas: 1
+  maxReplicas: 5
+  # CPU 사용량 80%, 메모리 사용량 70%를 기준으로 자동 확장 설정
+  metrics:
+    - type: Resource
+      resource:
+        name: cpu
+        target:
+          type: Utilization
+          averageUtilization: 80
+    - type: Resource
+      resource:
+        name: memory
+        target:
+          type: Utilization
+          averageUtilization: 70

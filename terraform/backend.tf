@@ -1,7 +1,7 @@
 terraform {
   backend "s3" {
-    bucket       = "terraform-s3-backend-curry"
-    key          = "stg/terraform.tfstate"
+    bucket       = "tf-state-s3-bucket-demo"
+    key          = "staging/terraform.tfstate"
     region       = "ap-northeast-2"
     use_lockfile = true
   }
